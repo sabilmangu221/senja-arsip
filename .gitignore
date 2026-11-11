@@ -1,0 +1,6 @@
+signingkey.jks
+signing/
+tools/
+*.apk
+build/
+.gradle/
