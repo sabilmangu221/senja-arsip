@@ -31,7 +31,7 @@ rootProject.name = "Keiyoushi"
 /**
  * Add or remove modules to load as needed for local development here.
  */
-// Personal fork (shinigami-ext): build only the Shinigami extension.
+// Build only the shinigami extension.
 loadIndividualExtension("id", "shinigami")
 
 /**

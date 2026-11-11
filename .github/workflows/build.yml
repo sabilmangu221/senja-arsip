@@ -1,4 +1,4 @@
-name: Build & publish Shinigami extension
+name: build
 
 on:
   push:
@@ -68,7 +68,7 @@ jobs:
       - name: Upload APK as workflow artifact (cadangan)
         uses: actions/upload-artifact@v4
         with:
-          name: shinigami-ext-v${{ steps.ver.outputs.version_code }}
+          name: build-v${{ steps.ver.outputs.version_code }}
           path: |
             src/id/shinigami/build/**/outputs/apk/release/*.apk
             src/id/shinigami/build/**/outputs/jar/release/*.jar
@@ -86,8 +86,8 @@ jobs:
             gh release upload "$TAG" "$APK" "$JAR" --clobber
           else
             gh release create "$TAG" "$APK" "$JAR" \
-              --title "Shinigami ext v${{ steps.ver.outputs.version_name }} (code ${{ steps.ver.outputs.version_code }})" \
-              --notes "Personal Mihon extension build. Install melalui repo index (branch repo), bukan manual, agar update otomatis jalan."
+              --title "v${{ steps.ver.outputs.version_name }} (code ${{ steps.ver.outputs.version_code }})" \
+              --notes "build"
           fi
 
       - name: Generate repo index (index.pb)

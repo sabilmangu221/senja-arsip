@@ -6,9 +6,7 @@ plugins {
 
 keiyoushi {
     name = "Shinigami"
-    // Personal fork (shinigami-ext): 86 = upstream 85 + runtime domain resolver
-    // (remote config + user override) — see Shinigami.kt.
-    versionCode = 86
+    versionCode = 87
     contentWarning = ContentWarning.SAFE
     libVersion = "1.6"
 

@@ -10,7 +10,7 @@ Inputs (CLI args):
                 keiyoushi-source-info.json plus outputs/apk/release/*.apk and
                 outputs/jar/release/*.jar (same layout the upstream script uses).
   --release-tag Release tag the assets were uploaded under, e.g. ext-v86.
-  --repo        GitHub repo slug, e.g. sabilmangu221/shinigami-ext.
+  --repo        GitHub repo slug, e.g. owner/name.
   --out         Output dir that becomes the content of the `repo` branch.
 
 The signing key fingerprint below MUST match the certificate of
@@ -81,8 +81,8 @@ def main() -> None:
     )
 
     index = index_pb2.Index(
-        name="Shinigami Personal",
-        badgeLabel="SGM",
+        name="Senja Arsip",
+        badgeLabel="SNJ",
         signingKey=SIGNING_KEY_SHA256,
         contact=index_pb2.Contact(website=f"https://github.com/{args.repo}"),
         extensionList=index_pb2.ExtensionList(extensions=[ext]),

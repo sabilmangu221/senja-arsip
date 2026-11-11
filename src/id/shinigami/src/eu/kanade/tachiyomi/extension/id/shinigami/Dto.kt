@@ -82,9 +82,9 @@ class ShinigamiPagesData2Dto(
     @SerialName("data") val pages: List<String> = emptyList(),
 )
 
-// Added in personal fork (shinigami-ext): remote domain config fetched at runtime
-// from the repo branch of sabilmangu221/shinigami-ext (config.json), so a domain
-// change can be picked up without shipping a new APK.
+// Remote domain config fetched at runtime from the `repo` branch
+// (config.json), so a domain change can be picked up without
+// shipping a new APK.
 @Serializable
 class ShinigamiRemoteConfigDto(
     val api: List<String> = emptyList(),

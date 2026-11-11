@@ -46,16 +46,14 @@ abstract class Shinigami :
 
     override fun OkHttpClient.Builder.configureClient(): OkHttpClient.Builder = rateLimit(3)
 
-    // ====================== Domain resolution (personal fork) ======================
+    // ====================== Domain resolution ======================
     //
-    // Upstream hardcodes a single API host. This fork resolves endpoints at runtime:
+    // Endpoints are resolved at runtime:
     //   1. A domain typed by the user in this source's settings (highest priority).
-    //   2. A remote config (config.json) published on the `repo` branch of
-    //      sabilmangu221/shinigami-ext, fetched at most once per process.
+    //   2. A remote config (config.json) on the `repo` branch, fetched at most
+    //      once per process.
     //   3. The last API host that worked in this process.
     //   4. The built-in default below.
-    // A Shinigami domain change then only needs a config.json edit (or a repo
-    // update), not a new APK.
 
     private fun normalizeBase(raw: String?): String? {
         val trimmed = raw?.trim()?.trimEnd('/') ?: return null
@@ -328,7 +326,7 @@ abstract class Shinigami :
     companion object {
         private const val DEFAULT_API_BASE = "https://api.shngm.io"
         private const val CONFIG_URL =
-            "https://raw.githubusercontent.com/sabilmangu221/shinigami-ext/repo/config.json"
+            "https://raw.githubusercontent.com/sabilmangu221/senja-arsip/repo/config.json"
 
         private const val PREF_WEB_DOMAIN = "web_domain"
         private const val PREF_API_DOMAIN = "api_domain"
