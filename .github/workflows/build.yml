@@ -94,8 +94,11 @@ jobs:
         env:
           TAG: ext-v${{ steps.ver.outputs.version_code }}
         run: |
-          pip install --quiet protobuf
-          python3 .github/scripts/publish-personal.py \
+          # Use a venv: the runner's system protobuf is too old for the
+          # generated index_pb2 bindings (no google.protobuf.runtime_version).
+          python3 -m venv /tmp/pubenv
+          /tmp/pubenv/bin/pip install --quiet protobuf
+          /tmp/pubenv/bin/python .github/scripts/publish-personal.py \
             --build-dir src/id/shinigami/build \
             --release-tag "$TAG" \
             --repo "${{ github.repository }}" \
