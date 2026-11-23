@@ -13,18 +13,18 @@ class ShinigamiBrowseDto(
 class ShinigamiBrowseDataDto(
     @SerialName("cover_portrait_url") private val coverPortraitUrl: String? = null,
     @SerialName("cover_image_url") private val coverImageUrl: String? = null,
-    @SerialName("manga_id") val mangaId: String? = "",
-    val title: String? = "",
+    @SerialName("manga_id") val mangaId: String = "",
+    val title: String = "",
 ) {
     val thumbnail: String?
-        get() = coverPortraitUrl?.takeIf { it.isNotBlank() }
-            ?: coverImageUrl?.takeIf { it.isNotBlank() }
+        get() = coverImageUrl?.takeIf { it.isNotBlank() }
+            ?: coverPortraitUrl?.takeIf { it.isNotBlank() }
 }
 
 @Serializable
 class MetaDto(
-    val page: Int,
-    @SerialName("total_page") val totalPage: Int? = null,
+    @SerialName("has_next") val hasNext: Boolean = false,
+    @SerialName("next_cursor") val nextCursor: String? = null,
 )
 
 @Serializable
@@ -41,10 +41,14 @@ class ShinigamiMangaDetailDataDto(
     val description: String = "",
     val status: Int = 0,
     val taxonomy: Map<String, List<TaxonomyItemDto>> = emptyMap(),
+    @SerialName("weighted_score") val weightedScore: Double? = null,
+    @SerialName("rating_count") val ratingCount: Int? = null,
+    @SerialName("bookmark_count") val bookmarkCount: Long? = null,
+    @SerialName("view_count") val viewCount: Long? = null,
 ) {
     val thumbnail: String?
-        get() = coverPortraitUrl?.takeIf { it.isNotBlank() }
-            ?: coverImageUrl?.takeIf { it.isNotBlank() }
+        get() = coverImageUrl?.takeIf { it.isNotBlank() }
+            ?: coverPortraitUrl?.takeIf { it.isNotBlank() }
 }
 
 @Serializable
@@ -53,8 +57,26 @@ class TaxonomyItemDto(
 )
 
 @Serializable
+class TaxonomyListDto(
+    val data: List<TaxonomyTermDto>,
+)
+
+@Serializable
+class TaxonomyTermDto(
+    val name: String,
+    val slug: String,
+)
+
+@Serializable
+class FilterDataDto(
+    val genres: List<TaxonomyTermDto> = emptyList(),
+    val themes: List<TaxonomyTermDto> = emptyList(),
+)
+
+@Serializable
 class ShinigamiChapterListDto(
     @SerialName("data") val chapterList: List<ShinigamiChapterListDataDto>,
+    val meta: MetaDto,
 )
 
 @Serializable
